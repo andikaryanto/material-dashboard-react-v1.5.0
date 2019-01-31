@@ -17,8 +17,21 @@ const getGroupUsers = async () => {
     try {
         // return await axios.get('http://localhost:4100/m_groupuser');
        var data = await axios.get('http://localhost:4100/m_groupuser');
+       var datas = [data['data'].length];
+       for(var i = 0; i < data['data'].length; i++) {
+            var single = [7];
+            single[0] = data['data'][i]['_id'];
+            single[1] = data['data'][i]['Name'];
+            single[2] = data['data'][i]['Description'];
+            single[3] = data['data'][i]['Created'];
+            single[4] = data['data'][i]['Modified'];
+            single[5] = data['data'][i]['CreatedBy'];
+            single[6] = data['data'][i]['ModifiedBy'];
+            datas[i] = single;
+       }
        
-       return data;
+       console.log(datas);
+       return datas;
     } catch (error) {
       console.error(error)
     }
@@ -90,7 +103,7 @@ function TableList(props) {
                 //     ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
                 //     ["Mason Porter", "Chile", "Gloucester", "$78,615"]
                 //   ]}
-                    tableData={test}
+                    tableData={groupuser}
                 />
               </CardBody>
             </Card>
